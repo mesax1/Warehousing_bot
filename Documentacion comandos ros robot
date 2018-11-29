@@ -1,0 +1,101 @@
+Comandos a usar para simular el robot
+
+
+1. Lanzar la descripcion del robot junto con Rviz
+
+
+roslaunch rrbot_description rrbot_rviz.launch
+
+1.1 Opcional lanzar la descripcion del robot en el simulador Gazebo
+
+roslaunch rrbot_gazebo rrbot_world.launch
+
+
+2. Lanzar el mapa vacío e iniciar odometría
+
+roslaunch rrbot_nav fake_move_base_blank_map.launch
+
+
+3. Lanzar el paquete de navegación para el robot en rviz
+
+ rosrun rviz rviz -d `rospack find rrbot_nav`/rrbot_nav_obstacles.rviz
+
+
+
+4. Programa en python que indica 4 posiciones a visitar por parte del robot
+
+rosrun rbx1_nav move_base_square.py
+
+
+
+Para lanzar el programa de visita de lugares automaticos
+lanzar cada uno de los siguientes comandos en una terminal separada, en este orden:
+
+roscore
+
+rqt_console &                              (este no es necesario, es solo para ver mensajes para monitoreo del script y los lugares objetivo)
+
+roslaunch rrbot_nav fake_nav_test.launch
+
+rosrun rviz rviz -d `rospack find rrbot_nav`/rrbot_amcl.rviz
+
+
+
+Lo que hacen los ultimos 2 comandos es lo siguiente: 
+fake_nav_test: This launch file brings up the model of the robot, the map_server node with the test map loaded, the move_base node with
+all the parameters tuned for the robot, the fake_localization node, and finally, the nav_test.py script itself.
+
+rrbot_amcl: Carga RVIZ con la configuracion de AMCL (Adaptive Monte Carlo localization)
+
+
+When RViz is up and the robot is visible, click on the 2D Pose Estimate button to setthe initial pose of the robot. Then click on the middle of the robot and align the green pose arrow with the yellow odometry arrow. As soon as you release the mouse, the navigation test will start.
+
+Para detener la simulacion: Ctrl-C en la ventana del fake_nav_test.launch
+
+
+
+Para lanzar el programa de ubicación en mapa dibujado, para poder obtener puntos para visita automática
+
+
+roslaunch rrbot_description rrbot_fake.launch
+
+roslaunch rrbot_nav fake_amcl.launch map:=map_warehouse.yaml                  en este caso se usa el mapa del warehouse lab
+
+rosrun rviz rviz -d `rospack find rrbot_nav`/rrbot_amcl.rviz
+
+
+
+Para lanzar el programa de ubicación en mapa dibujado, con navegacion a puntos automaticos
+
+roscore
+
+roslaunch rrbot_nav lab_nav_test.launch
+
+rosrun rviz rviz -d `rospack find rrbot_nav`/rrbot_amcl.rviz
+
+
+
+Para cargar el programa en el Turtlebot para moverse en el lab
+
+robot start-up file:
+roslaunch turtlebot_bringup minimal.launch --screen
+
+launch file that loads AMCL and MAP
+roslaunch turtlebot_navigation amcl_demo.launch
+
+launch rviz with navigation test configuration
+roslaunch turtlebot_rviz_launchers view_navigation.launch --screen
+
+launch the teleoperation with keyboard
+roslaunch turtlebot_teleop keyboard_teleop.launch --screen
+
+To set the initial pose click on 2D Pose Estimate and select current location and orientation of the robot in the map.
+Now we can use 2D Nav Goal for point-click navigation goals.
+
+
+
+
+
+password wms servibarras
+
+

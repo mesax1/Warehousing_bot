@@ -1,0 +1,43 @@
+Para OCTOMAP en Gazebo y crear Mapa proyectado en 2D
+
+roslaunch turtlebot_gazebo turtlebot_world.launch
+
+roslaunch turtlebot_rviz_launchers view_robot.launch
+roslaunch turtlebot_rviz_launchers view_navigation.launch
+
+roslaunch turtlebot_teleop keyboard_teleop.launch
+
+#Save projected map from 3d to 2d in a .yaml and pgm format
+rosrun map_server map_saver -f filteredoctomap2d /map:=/projected_map
+
+#Save Octomap map file
+rosrun octomap_server octomap_saver filteredmap.bt
+
+#Launch AMCL in Gazebo
+roslaunch turtlebot_gazebo amcl_demo.launch
+
+
+
+Para cargar el programa en el Turtlebot para moverse en el lab
+
+ssh juan@ip remote pc
+
+On the turtlebot PC
+
+robot start-up file:
+roslaunch turtlebot_bringup minimal.launch --screen
+
+roslaunch slam_demo mapServer.launch
+
+#Launch AMCL in robot
+roslaunch turtlebot_navigation amcl3d.launch
+
+On the workstation
+roslaunch turtlebot_rviz_launchers view_robot.launch
+
+#Save projected map from 3d to 2d in a .yaml and pgm format
+rosrun map_server map_saver -f filteredoctomap2d /map:=/projected_map
+
+
+#Para ver ROS TF frames
+rosrun rqt_graph rqt_graph 

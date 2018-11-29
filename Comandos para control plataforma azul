@@ -1,0 +1,31 @@
+Para conectarse a pc portátil desde Workstation 
+
+ssh juan@10.203.13.85
+
+
+Ahora desde terminal conectada al portatil
+
+roslaunch blue_plat platform.launch
+
+En otra terminal conectad al portátil
+
+rosrun teleop_twist_keyboard teleop_twist_keyboard.py
+
+
+
+Para probar Kinect
+
+roscore
+
+roslaunch openni_launch openni.launch device_id:=#2
+
+
+
+
+roslaunch blue_robot blue_robot.launch
+
+roslaunch slam_demo mapServer2.launch
+
+roslaunch blue_robot_nav fake_amcl.launch map:=map_warehouse.yaml                  en este caso se usa el mapa del warehouse lab
+
+rosrun rviz rviz -d `rospack find blue_robot_nav`/rrbot_amcl.rviz
