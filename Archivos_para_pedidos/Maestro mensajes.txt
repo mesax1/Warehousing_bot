@@ -1,0 +1,8 @@
+Codigo Mensaje	Mensaje	
+m0	Viajando a posicion	
+m1	Recoger producto	
+m2	Finalizando ruta	
+m3	Recoger canastas llenas, y colocar canastas vacias	
+m4	Viajando para clasificar	
+m5	Clasificar productos en medios	
+m6	Iniciar nueva consolidacion	

@@ -1,0 +1,6 @@
+Accion 	Descripcion
+0	Viajar
+1	Parar para que el usuario tome productos en picker to parts
+2	Parar y finalizar ruta
+3	Parar para que el usuario tome productos en pick and sort
+4	Parar para clasificar producto
